@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DialogApp</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <script type="text/javascript" src="https://unpkg.com/@microsoft/office-js@1.1.37-custom.16/dist/office.debug.js"></script> 
+</head>
+
+   	<script type="text/javascript">
+		var _dialog;
+			function launchDialogCallback(asyncResult){
+				if(asyncResult.status=="succeeded"){
+					_dialog = asyncResult.value;
+					_dialog.addEventHandler(Microsoft.Office.WebExtension.EventType.DialogMessageReceived, addStatus);
+					_dialog.addEventHandler(Microsoft.Office.WebExtension.EventType.DialogEventReceived, addCloseStatus);
+				}else{
+					text.value = asyncResult.error.message;
+				}
+			}
+			function LaunchDialog(event) {
+				Office.context.ui.displayDialogAsync("https://madhavagrawal17.github.io/DialogApi/Dialog.html",
+					{height:80, width:50, requireHTTPS: true, promptBeforeOpen:false}, 
+					launchDialogCallback);
+			}
+
+			function BtnSetData() {
+				var value = document.getElementById("TxtData").value;
+				if (!value) {
+					value = "Hello";
+				}
+
+				_dialog.messageChild(value);
+			}
+			
+			function addStatus(arg){
+				text.value = text.value + arg.message;
+				var w = window;
+				console.log(w.location.href);
+			 }
+
+			function onMessage(message, dialog){
+				text.value = text.value + message;
+			 }
+
+			 function addCloseStatus(arg){
+				text.value = text.value + " " + arg.error;
+				text.value = text.value + "dialog closed";
+			 }
+	</script>
+	<script>
+		// Perform Step 2 of an initialization that -- in a real developer scenario (non-test-agave), would have
+		//    been included inside the "excel-web-16.00.js"/"excel-win32-16.01.js"/etc files
+		Office.onReady(function(info) {
+			// do something
+		});
+	</script>
+	<body>
+		<div>
+			Message
+			<div>
+				<button id="BtnSetData" onclick="BtnSetData()">SendMessageToChild</button>: <input id="TxtData" type="text" />
+			</div>
+		</div>
+		<div>
+			<br><br>
+			<textarea id="text" cols="20" rows="10"></textarea>
+			<input type="button" onclick="LaunchDialog()" value="LaunchDialog" id="LaunchDialog"/>
+		</div>
+		<div>
+			<div>
+				<button id="BtnRun" onclick="BtnRun()">Run</button> the following code:
+			</div>
+			<div>
+				<textarea id="TxtCode" cols="40" rows="20" spellcheck="false"></textarea>
+			</div>
+		</div>
+		<div>Logs:</div>
+		<div id="DivLog">
+		</div>
+	</body>
+</html>
+
