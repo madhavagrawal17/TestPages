@@ -49,7 +49,7 @@
 				 try {
 				      _dialog.close();
 				    } catch (error) {
-				      const errorMessage: string = error as string;
+				      var errorMessage = error.toString();
 
 				   	text.value = text.value + "error: " + errorMessage;
 				    }
