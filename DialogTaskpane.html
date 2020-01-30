@@ -45,6 +45,14 @@
 			 function addCloseStatus(arg){
 				text.value = text.value + " " + arg.error;
 				text.value = text.value + "dialog closed";
+				 
+				 try {
+				      _dialog.close();
+				    } catch (error) {
+				      const errorMessage: string = error as string;
+
+				   	text.value = text.value + "error: " + errorMessage;
+				    }
 			 }
 	</script>
 	<script>
