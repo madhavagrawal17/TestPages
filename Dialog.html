@@ -26,6 +26,7 @@
 
 			function onMessageFromParent(event) {
 				messsageFromDialog.value += event.message;
+				Office.context.ui.messageParent("echo: " + event.message);
 			}
 
 	   		function onRegisterMessageComplete(asyncResult) {
