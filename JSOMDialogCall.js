@@ -91,7 +91,7 @@ var _dialog
 /// <summary>
 /// heightValue of dialog
 /// </summary>
-var 
+var _dialogHeight
 
 
 /// <summary>
