@@ -118,7 +118,7 @@ function getParameterByName(name, url) {
 }
 
 Office.initialize = function (reason) {
-
+	registerMessageChild();
 	var dialogMessage = window.innerHeight + "+" + window.innerWidth; 
 	if (dialogMessage) {
 		Office.context.ui.messageParent(dialogMessage);
@@ -294,6 +294,14 @@ function cleanOutputTextBox() {
 	document.getElementById("output3").value = "";
 	document.getElementById("output4").value = "";
 	document.getElementById("output5").value = "";
+}
+
+function registerMessageChild() {
+	Office.context.ui.addHandlerAsync(Office.EventType.DialogParentMessageReceived, onMessageFromParent);
+}
+
+function onMessageFromParent(event) {
+	Office.context.ui.messageParent(event.message);
 }
 
 var PASS_KEYWORD = "Done all tests";
