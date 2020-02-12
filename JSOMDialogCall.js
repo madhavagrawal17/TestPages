@@ -91,7 +91,8 @@ var _dialog
 /// <summary>
 /// heightValue of dialog
 /// </summary>
-var _dialogHeight
+var 
+
 
 /// <summary>
 /// widthValue of dialog
@@ -374,6 +375,28 @@ function executeOpenSmallerDialogTests() {
 				_dialog.close();
 				_dialog = null;
 			});
+		}
+    });
+}
+
+function executeOpenDialogTwoWayMessageTests() {
+	var dialogUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+	dialogUrl = dialogUrl.replace("JSOMTestDialog.html", "JSOMTestChildDialog.html")
+	Office.context.ui.displayDialogAsync(dialogUrl, {height: 80, width:80}, function(asyncResult){
+		if(asyncResult.status == Office.AsyncResultStatus.Succeeded)
+		{
+			_dialog = asyncResult.value;
+			_dialog.addEventHandler(Microsoft.Office.WebExtension.EventType.DialogMessageReceived, function (arg) {
+				if (arg.message === PASS_KEYWORD) {
+					_dialog.close();
+					_dialog = null;
+				} else {
+					var winParas = arg.message.split("+");
+					_dialogHeight = parseFloat(winParas[0]);
+					_dialogWidth = parseFloat(winParas[1]);
+				}
+			});
+			_dialog.messageChild(PASS_KEYWORD);
 		}
     });
 }
