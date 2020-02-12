@@ -1,0 +1,137 @@
+<html>
+	<head>
+		<title>JSOM Dialog API verification</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=9" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, initial-scale=1.0">
+			<script type="text/javascript" src="https://appsforoffice.edog.officeapps.live.com/afo/lib/1.1/hosted/office.debug.js"></script>
+			<script type="text/javascript" src="JSOMChildDialogCall.js"></script>
+			<style>
+				input[type=text] {
+					width: 100%;
+				}
+			
+			textarea {
+				width: 100%;
+			}
+			
+			.block {
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				display: block;
+			}
+			
+			.blockcontent {
+				padding: 10px;
+				font-family: Sans-Serif;
+			}
+			
+			.odd {
+				background-color: #EEEEEE;
+			}
+			
+			.even {
+				background-color: #CCCCCC;
+			}
+			
+			.title {
+				font-size: 125%;
+				padding: 0;
+				margin: 0;
+			}
+			
+			html, body, .content {
+				padding: 0;
+				margin: 0;
+				border-width: 0;
+			}
+			
+			.content {
+				display: block;
+				width: 100%;
+				box-sizing: border-box;
+			}
+			
+			p {
+				margin-top: 3px;
+				margin-bottom: 3px;
+			}
+			</style>
+			</head>
+	<body>
+		<div class="content">
+			<div class="block odd">
+				<div class="blockcontent">
+					<p class="title">Evaluate Javascript:</p>
+					<div class="calls" id="calls_evaluatejavascript">
+						<textarea id="codeWindow" spellcheck="false" cols="40" rows="5"></textarea>
+						<input id="executeCode" type="button" onclick="executeJavaScript()" value="Execute Code" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="block even">
+				<div class="blockcontent">
+					<p class="title">Misc</p>
+					<div class="calls" id="calls_misc">
+						<input id="WakeUpHost" type="button" onclick="wakeUpHost()" value="WakeUpHost" />
+						<input id="windowOpen" type="button" onclick="windowOpen()" value="windowOpen" />
+						<input id="FileProperties" type="button" onclick="getFilePropertiesAsync()" value="FileProperties" />
+						<input id="StressTest" type="button" onclick="stressTest()" value="StressTest" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="block even">
+				<div class="blockcontent">
+					<p class="title">Output</p>
+					<div class="calls" id="calls_output">
+						<input id="cleanOutput" type="button" onclick="cleanOutputTextBox()" value="Clean Output" />
+						<br />
+						<textarea cols="80" rows="5" id="output"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="outputStepResult"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			<div class="block odd">
+				<div class="blockcontent">
+					<p class="title">Properties Output:</p>
+					<div class="calls" id="calls_propertiesoutput">
+						<textarea cols="40" rows="1" id="output1"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="output2"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="output3"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="output4"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="output5"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			<div class="block even">
+				<div class="blockcontent">
+					<p class="title">Input</p>
+					<div class="calls" id="calls_input">
+						<textarea cols="40" rows="5" id="input1"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="input2"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="input3"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="input4"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="input5"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="input6"></textarea>
+						<br />
+						<textarea cols="40" rows="1" id="itemName"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
